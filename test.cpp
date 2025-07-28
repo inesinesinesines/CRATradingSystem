@@ -3,14 +3,7 @@
 #include "MockDriver.cpp"
 #include <string>
 
-<<<<<<< HEAD
-TEST(TC, TC1) {
-	AutoTradingSystem* ats = new AutoTradingSystem();
-	std::string broker = "mock";
-	ats->selectStockBroker(broker);
-	EXPECT_EQ(broker, ats->getCurrentBrokerName());
-}
-
+#include "MockDriver.cpp"
 
 class MockDriverTest : public ::testing::Test {
 public:
