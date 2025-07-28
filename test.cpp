@@ -1,22 +1,14 @@
 #include "gmock/gmock.h"
-#include "autotradingsystem.cpp"
+#include <string>
+#if 01
 #include "MockDriver.cpp"
 #include <string>
-
-TEST(TC, TC1) {
-	AutoTradingSystem* ats = new AutoTradingSystem();
-	std::string broker = "mock";
-	ats->selectStockBroker(broker);
-	EXPECT_EQ(broker, ats->getCurrentBrokerName());
-}
-
 
 class MockDriverTest : public ::testing::Test {
 public:
 protected:
 	void SetUp() override {
 	}
-
 	StockBrockerDriver* sbDriver = new MockDriver();
 
 	const std::string ID = "USER";
@@ -49,4 +41,4 @@ TEST_F(MockDriverTest, SellTest) {
 TEST_F(MockDriverTest, GetPrice) {
 	EXPECT_NO_THROW({ sbDriver->getPrice(STOCKCODE); });
 }
-
+#endif 

@@ -17,17 +17,21 @@ public:
 	void SetUp() override {
 		std::ostringstream oss;
 		oldCoutStreamBuf = std::cout.rdbuf();
-		std::cout.rdbuf(oss.rdbuf()); // »õ·Î¿î ¹öÆÛ·Î redirection
+		std::cout.rdbuf(oss.rdbuf()); // Â»ÃµÂ·ÃŽÂ¿Ã® Â¹Ã¶Ã†Ã›Â·ÃŽ redirection
 
 		BROKER = GetParam();
 	}
 
 	void TearDown() override{
-		std::cout.rdbuf(oldCoutStreamBuf); //º¹¿ø
+		std::cout.rdbuf(oldCoutStreamBuf); //ÂºÂ¹Â¿Ã¸
 	}
-
-	string GetConsolePrint() {
-		return oss.str();
+	string GetConsolePrintlower() {
+		string originalStr = oss.str();
+		string lowerStr;
+		for (char c : originalStr) {
+			lowerStr += static_cast<char>(tolower(c));
+		}
+		return lowerStr;
 	}
 
 	void SetBrokerAndLogin() {
@@ -54,7 +58,10 @@ TEST_P(AutoTradingSystemFixture, GetBroker) {
 
 TEST_P(AutoTradingSystemFixture, Login) {
 	SetBrokerAndLogin();
+  
 	EXPECT_EQ(ID, ats.getLoginUserID());
+	string str = GetConsolePrintlower();
+	EXPECT_THAT(str.find("login"), Not(std::string::npos));
 }
 
 TEST_P(AutoTradingSystemFixture, LoginFailTest_NoBroker) {
@@ -66,6 +73,8 @@ TEST_P(AutoTradingSystemFixture, Buy) {
 	int currentStockCount = ats.getUserStockCount(STOCKCODE);
 	ats.buy(STOCKCODE, stockCount, stockPrice);
 	EXPECT_EQ(currentStockCount + stockCount, ats.getUserStockCount(STOCKCODE));
+	string str = GetConsolePrintlower();
+	EXPECT_THAT(str.find("buy"), Not(std::string::npos));
 }
 
 TEST_P(AutoTradingSystemFixture, BuyFailTest_NoLogin) {
@@ -90,6 +99,9 @@ TEST_P(AutoTradingSystemFixture, Sell) {
 	int prevUserStockCnt = ats.getUserStockCount(STOCKCODE);
 	ats.sell(STOCKCODE, stockCount, stockPrice);
 	EXPECT_THAT(ats.getUserStockCount(STOCKCODE), Le(prevUserStockCnt));
+
+	string str = GetConsolePrintlower();
+	EXPECT_THAT(str.find("sell"), Not(std::string::npos));
 }
 
 TEST_P(AutoTradingSystemFixture, SellFailTest_NoLogin) {
