@@ -1,5 +1,7 @@
 #include <string>
 
+#pragma once
+
 #include "Broker.h"
 #include "MockDriver.cpp"
 #include "kiwer_adapter.cpp"
