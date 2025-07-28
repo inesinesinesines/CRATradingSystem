@@ -36,7 +36,13 @@ public:
     std::string getCurrentBrokerName() {
         return broker_name;
     }
+    std::string getLoginUserID() {
+        return "";
+    }
 
+    int getUserStockCount(std::string code) {
+        return 0;
+    }
     // StockBrockerDriver의 pure virtual 함수 반드시 모두 구현해야 함!
     bool login(std::string id, std::string passwd) override {
         if (isValidLoginParameter(id, passwd)) {
@@ -54,6 +60,14 @@ public:
     }
     int getPrice(std::string code) override {
         return 0;
+    }
+
+    bool buyNiceTiming(std::string code, int cost) {
+        return true;
+    }
+
+    bool sellNiceTiming(std::string code, int cost) {
+        return true;
     }
 
 private:

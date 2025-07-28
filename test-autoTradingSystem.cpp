@@ -1,12 +1,20 @@
 #include "gmock/gmock.h"
 #include <string>
 #include <cctype>
+
+#include "autotradingsystem.cpp"
+
 using namespace std;
 using namespace testing;
 
+class MockAutoTradingSystem : public AutoTradingSystem{
+public:
+	MOCK_METHOD(int, getPrice, (std::string code), (override));
+};
+
 class AutoTradingSystemFixture : public TestWithParam<string> {
 public:
-	AutoTradingSystem ats;
+	MockAutoTradingSystem ats;
 	std::string BROKER = "";
 	const std::string ID = "USER";
 	const std::string PASSWORD = "PASSWORD";
@@ -31,7 +39,7 @@ public:
 	}
 
 	void SetBrokerAndLogin() {
-		ats.selectBroker(BROKER);
+		ats.selectStockBroker(BROKER);
 		ats.login(ID, PASSWORD);
 	}
 
@@ -44,12 +52,12 @@ private :
 INSTANTIATE_TEST_SUITE_P(SelectBroker, AutoTradingSystemFixture, Values("mock", "kiwer", "nemo"));
 
 TEST_P(AutoTradingSystemFixture, SelectBroker) {
-	EXPECT_EQ(true, ats.selectBroker(BROKER));
+	EXPECT_EQ(true, ats.selectStockBroker(BROKER));
 }
 
 TEST_P(AutoTradingSystemFixture, GetBroker) {
-	ats.selectBroker(BROKER);
-	EXPECT_EQ(BROKER, ats.getBrokerName());
+	ats.selectStockBroker(BROKER);
+	EXPECT_EQ(BROKER, ats.getCurrentBrokerName());
 }
 
 TEST_P(AutoTradingSystemFixture, Login) {
@@ -69,7 +77,7 @@ TEST_P(AutoTradingSystemFixture, Buy) {
 }
 
 TEST_P(AutoTradingSystemFixture, BuyFailTest_NoLogin) {
-	ats.selectBroker(BROKER);
+	ats.selectStockBroker(BROKER);
 	EXPECT_THROW(ats.buy(STOCKCODE, stockCount, stockPrice), std::exception);
 }
 
@@ -93,7 +101,7 @@ TEST_P(AutoTradingSystemFixture, Sell) {
 }
 
 TEST_P(AutoTradingSystemFixture, SellFailTest_NoLogin) {
-	ats.selectBroker(BROKER);
+	ats.selectStockBroker(BROKER);
 	EXPECT_THROW(ats.sell(STOCKCODE, stockCount, stockPrice), std::exception);
 }
 
@@ -115,6 +123,11 @@ TEST_P(AutoTradingSystemFixture, GetPrice) {
 TEST_P(AutoTradingSystemFixture, buyNiceTiming) {
 	SetBrokerAndLogin();
 	int prevUserStockCnt = ats.getUserStockCount(STOCKCODE);
+
+	EXPECT_CALL(ats, getPrice(STOCKCODE)).WillOnce(Return(20))
+		.WillOnce(Return(15))
+		.WillOnce(Return(10));
+
 	ats.buyNiceTiming(STOCKCODE, stockCount * stockPrice);
 	EXPECT_THAT(ats.getUserStockCount(STOCKCODE), Ge(prevUserStockCnt));
 }
@@ -128,6 +141,11 @@ TEST_P(AutoTradingSystemFixture, buyNiceTiming_FailWith0Cost) {
 TEST_P(AutoTradingSystemFixture, sellNiceTiming) {
 	SetBrokerAndLogin();
 	int prevUserStockCnt = ats.getUserStockCount(STOCKCODE);
+
+	EXPECT_CALL(ats, getPrice(STOCKCODE)).WillOnce(Return(10))
+		.WillOnce(Return(15))
+		.WillOnce(Return(20));
+
 	ats.sellNiceTiming(STOCKCODE, stockCount * stockPrice);
 	EXPECT_THAT(ats.getUserStockCount(STOCKCODE), Le(prevUserStockCnt));
 }
