@@ -4,7 +4,7 @@
 #include "MockDriver.cpp"
 #include "kiwer_adapter.cpp"
 #include "nemo_adapter.cpp"
-
+#include <unordered_map>
 using std::string;
 
 class AutoTradingSystem : public StockBrockerDriver{
@@ -47,16 +47,30 @@ public:
     }
 
     bool buy(std::string code, int price, int quantity) override {
+      stockMap[code] += quantity;
         return true;
     }
+    
     bool sell(std::string code, int price, int quantity) override {
+      stockMap[code] -= quantity;
         return true;
     }
+    
     int getPrice(std::string code) override {
         return 0;
     }
+    
+    int getUserStockCount(std::string code) {
+      auto it = stockMap.find(code);
+      if (it != stockMap.end()) {
+        return it->second;  // 보유한 수량
+      }
+      return 0;  // 해당 종목 없음
+    }
 
-private:
+    string getLoginUserID() { return userId; }
+
+   private:
     bool isValidLoginParameter(std::string& id, std::string& passwd)
     {
         if (brocker == nullptr) return false;
@@ -64,4 +78,6 @@ private:
 
         return true;
     }
+    std::unordered_map<std::string, int> stockMap;
+    std::string userId;
 };
