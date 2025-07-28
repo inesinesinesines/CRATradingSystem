@@ -50,7 +50,7 @@ private :
 };
 
 
-INSTANTIATE_TEST_SUITE_P(SelectBroker, AutoTradingSystemFixture, Values("DUMMY", "KIWER", "NEMO"));
+INSTANTIATE_TEST_SUITE_P(SelectBroker, AutoTradingSystemFixture, Values("mock", "kiwer", "nemo"));
 
 TEST_P(AutoTradingSystemFixture, SelectBroker) {
 	EXPECT_EQ(true, ats.selectBroker(BROKER));
