@@ -11,56 +11,46 @@ TEST(TC, TC1) {
 }
 
 
-TEST(MockDriverTest, LoginTest) {
+class MockDriverTest : public ::testing::Test {
+public:
+protected:
+	void SetUp() override {
+	}
+
 	StockBrockerDriver* sbDriver = new MockDriver();
-	std::string ID = "USER";
-	std::string PASSWORD = "PASSWORD";	
-	std::string STOCKCODE = "SAM";
+
+	const std::string ID = "USER";
+	const std::string PASSWORD = "PASSWORD";
+	const std::string STOCKCODE = "SAM";
+	const int stockCount = 1000;
+	const int stockPrice = 50;
+};
+
+TEST_F(MockDriverTest, LoginTest_1) {
 	EXPECT_NO_THROW({ sbDriver->login(ID, PASSWORD); });
 }
 
-TEST(MockDriverTest, BuyTest) {
-	StockBrockerDriver* sbDriver = new MockDriver();
-	std::string ID = "USER";
-	std::string PASSWORD = "PASSWORD";
-	std::string STOCKCODE = "SAM";
-	int count = 1000;
-	int price = 50;
-
+TEST_F(MockDriverTest, BuyTest) {
 	// User should login before request buy 
-	EXPECT_EQ(false, sbDriver->buy(PASSWORD, count, price));
+	EXPECT_EQ(false, sbDriver->buy(STOCKCODE, stockCount, stockPrice));
 
 	sbDriver->login(ID, PASSWORD);
-	EXPECT_EQ(true, sbDriver->buy(PASSWORD, count, price));
+	EXPECT_EQ(true, sbDriver->buy(STOCKCODE, stockCount, stockPrice));
 }
 
-TEST(MockDriverTest, SellTest) {
-	StockBrockerDriver* sbDriver = new MockDriver();
-	std::string ID = "USER";
-	std::string PASSWORD = "PASSWORD";
-	std::string STOCKCODE = "SAM";
-	int count = 1000;
-	int price = 50;
-
-	// User should login before request buy 
-	EXPECT_EQ(false, sbDriver->sell(PASSWORD, count, price));
+TEST_F(MockDriverTest, SellTest) {
+	// User should login before request sell 
+	EXPECT_EQ(false, sbDriver->sell(STOCKCODE, stockCount, stockPrice));
 
 	sbDriver->login(ID, PASSWORD);
-	EXPECT_EQ(true, sbDriver->sell(PASSWORD, count, price));
+	EXPECT_EQ(true, sbDriver->sell(STOCKCODE, stockCount, stockPrice));
 }
 
-TEST(MockDriverTest, GetPrice) {
-	StockBrockerDriver* sbDriver = new MockDriver();
-	std::string ID = "USER";
-	std::string PASSWORD = "PASSWORD";
-	std::string STOCKCODE = "SAM";
-	int count = 1000;
-	int price = 50;
-
-	// User should login before request buy 
-	EXPECT_EQ(false, sbDriver->getPrice(PASSWORD, count, price));
+TEST_F(MockDriverTest, GetPrice) {
+	// User should login before request getPrice 
+	EXPECT_EQ(false, sbDriver->getPrice(STOCKCODE));
 
 	sbDriver->login(ID, PASSWORD);
-	EXPECT_EQ(true, sbDriver->getPrice(PASSWORD, count, price));
+	EXPECT_EQ(true, sbDriver->getPrice(STOCKCODE));
 }
 
