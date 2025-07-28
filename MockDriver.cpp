@@ -9,20 +9,29 @@ class MockDriver : public StockBrockerDriver {
       std::cout << "Not Logined Yet\n";
       return false;
     }
+
     return true;
   }
 
- public:
-  bool login(std::string id, std::string passwd) override {
-    if (id == "" || passwd == "") {
+  void checkAssert(std::string str) {
+    if (str == "") {
       throw std::invalid_argument("Invalid Argument Exists");
     }
+  }
+
+ public:
+  bool login(std::string id, std::string password) override {
+    checkAssert(id);
+    checkAssert(password);
+
     std::cout << "Login Success\n";
     isLogined = true;
     return true;
   }
 
   bool buy(std::string password, int count, int price) override {
+    checkAssert(password);
+
     if (!isLoginState()) {
       return false;
     }
@@ -32,6 +41,8 @@ class MockDriver : public StockBrockerDriver {
   }
 
   bool sell(std::string code, int count, int stockPrice) override {
+    checkAssert(code);
+
     if (!isLoginState()) {
       return false;
     }
@@ -40,11 +51,12 @@ class MockDriver : public StockBrockerDriver {
     return true;
   };
   int getPrice(std::string code) override {
+    checkAssert(code);
+
     if (!isLoginState()) {
       return 0;
     }
 
-    int price = std::rand() % 10 * 100 + 5000;
-    return price;
+    return 1;
   };
 };
