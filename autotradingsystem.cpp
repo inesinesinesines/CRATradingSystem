@@ -1,16 +1,24 @@
 #include <string>
 
 #include "Broker.h"
-#include "MockDriver.h"
+#include "MockDriver.cpp"
 
 using std::string;
 
 class AutoTradingSystem {
 public:
 
+	std::unique_ptr<StockBrockerDriver> brocker;
 	string broker_name;
 
-	void selectStockBroker(std::string blockername) {
+	bool selectStockBroker(std::string brocker_name) {
+		if (brocker_name == "mock") {
+			brocker = std::make_unique<MockDriver>();
+			this->broker_name = "mock";
+			return true;
+		}
+
+		return false;
 
 	}
 

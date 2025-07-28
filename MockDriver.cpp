@@ -1,6 +1,8 @@
 #include "Broker.h"
 #include "gmock/gmock.h"
 
+#pragma once
+
 class MockDriver : public StockBrockerDriver {
  private:
   bool isLogined = false;
