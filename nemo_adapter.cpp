@@ -1,27 +1,28 @@
 #include "nemo_api.cpp"
+#include "Broker.cpp"
 #include <string>
 
 
-class NemoAdapter {
+class NemoAdapter : public StockBrockerDriver {
 public:
 	NemoAdapter(NemoAPI* nemo) : api(nemo) {
 
 	}
 
-	bool login(std::string id, std::string passwd) {
+	bool login(std::string id, std::string passwd) override {
 		api->certification(id, passwd);
 		return true;
 	}
 
-	bool buy(std::string code, int count, int price) {
+	bool buy(std::string code, int count, int price) override {
 		api->purchasingStock(code, price, count);
 	}
 
-	bool sell(std::string code, int count, int price) {
+	bool sell(std::string code, int count, int price) override {
 		api->sellingStock(code, price, count);
 	}
 
-	bool getPrice(std::string code, int count, int price) {
+	int getPrice(std::string code) override {
 		api->getMarketPrice(code, 1);
 	}
 
