@@ -5,6 +5,8 @@
 
 class NemoAdapter : public StockBrockerDriver {
 public:
+
+	NemoAdapter() = default;
 	NemoAdapter(NemoAPI* nemo) : api(nemo) {
 
 	}
