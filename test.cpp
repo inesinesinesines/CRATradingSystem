@@ -2,7 +2,7 @@
 #include "autotradingsystem.cpp"
 #include "MockDriver.cpp"
 #include <string>
-
+#if 01
 #include "MockDriver.cpp"
 
 class MockDriverTest : public ::testing::Test {
@@ -43,4 +43,4 @@ TEST_F(MockDriverTest, SellTest) {
 TEST_F(MockDriverTest, GetPrice) {
 	EXPECT_NO_THROW({ sbDriver->getPrice(STOCKCODE); });
 }
-
+#endif 
