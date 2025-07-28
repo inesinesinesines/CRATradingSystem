@@ -1,31 +1,15 @@
 #include "gmock/gmock.h"
 #include <string>
 
-///#include "MockDriver.cpp"
-
-class StockBrockerDriver {
-public:
-	virtual bool login(std::string id, std::string pwd);
-	virtual bool buy(std::string code, int stockCount, int stockPrice);
-	virtual bool sell(std::string code, int stockCount, int stockPrice);
-	virtual int getPrice(std::string code);
-};
-
-class MockDriver : public StockBrockerDriver {
-public:
-	bool login(std::string id, std::string pwd) override { return true; };
-	bool buy(std::string code, int stockCount, int stockPrice)override { return true; };
-	bool sell(std::string code, int count, int stockPrice)override { return true; };
-	int getPrice(std::string code) override { return 1; };
-};
-
+#include "MockDriver.cpp"
 
 class MockDriverTest : public ::testing::Test {
 public:
+protected:
 	void SetUp() override {
-		StockBrockerDriver* sbDriver = new MockDriver();
 	}
-	StockBrockerDriver* sbDriver;
+
+	StockBrockerDriver* sbDriver = new MockDriver();
 
 	const std::string ID = "USER";
 	const std::string PASSWORD = "PASSWORD";
