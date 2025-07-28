@@ -3,6 +3,7 @@
 #include "MockDriver.cpp"
 #include <string>
 
+<<<<<<< HEAD
 TEST(TC, TC1) {
 	AutoTradingSystem* ats = new AutoTradingSystem();
 	std::string broker = "mock";
@@ -47,6 +48,14 @@ TEST_F(MockDriverTest, SellTest) {
 }
 
 TEST_F(MockDriverTest, GetPrice) {
+<<<<<<< HEAD
 	EXPECT_NO_THROW({ sbDriver->getPrice(STOCKCODE); });
+=======
+	// User should login before request getPrice 
+	EXPECT_EQ(false, sbDriver->getPrice(STOCKCODE));
+
+	sbDriver->login(ID, PASSWORD);
+	EXPECT_EQ(true, sbDriver->getPrice(STOCKCODE));
+>>>>>>> 490e471 (todo: fix build error)
 }
 
