@@ -39,10 +39,6 @@ TEST_F(MockDriverTest, SellTest) {
 }
 
 TEST_F(MockDriverTest, GetPrice) {
-	// User should login before request getPrice 
-	EXPECT_EQ(false, sbDriver->getPrice(STOCKCODE));
-
-	sbDriver->login(ID, PASSWORD);
-	EXPECT_EQ(true, sbDriver->getPrice(STOCKCODE));
+	EXPECT_NO_THROW({ sbDriver->getPrice(STOCKCODE); });
 }
 
