@@ -140,7 +140,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Brocker.h" />
+    <ClInclude Include="autotradingsystem.h" />
+    <ClInclude Include="Broker.h" />
     <ClInclude Include="MockDriver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

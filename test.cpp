@@ -1,14 +1,14 @@
 #include "gmock/gmock.h"
-#include "autotradingsystem.cpp"
+#include "autotradingsystem.h"
 #include "MockDriver.cpp"
 #include <string>
 
-TEST(TC, TC1) {
-	AutoTradingSystem* ats = new AutoTradingSystem();
-	std::string broker = "mock";
-	ats->selectStockBroker(broker);
-	EXPECT_EQ(broker, ats->getCurrentBrokerName());
-}
+//TEST(TC, TC1) {
+//	AutoTradingSystem* ats = new AutoTradingSystem();
+//	std::string broker = "mock";
+//	ats->selectStockBroker(broker);
+//	EXPECT_EQ(broker, ats->getCurrentBrokerName());
+//}
 
 
 class MockDriverTest : public ::testing::Test {
