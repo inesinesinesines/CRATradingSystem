@@ -1,12 +1,23 @@
 #include <string>
+//#include "MockDriver.h"
 
 class AutoTradingSystem {
 public:
-	void selectStockBroker(std::string blockername) {
+
+	std::string broker_name;
+
+	bool selectStockBroker(std::string brocker_name) {
+
+		if (brocker_name == "mock") {
+			//std::make_unique<MockDriver>();
+			this->broker_name = "mock";
+			return true;
+		}
+		return false;
 
 	}
 
 	std::string getCurrentBrokerName() {
-		return nullptr;
+		return broker_name;
 	}
 };
