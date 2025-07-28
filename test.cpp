@@ -1,6 +1,6 @@
 #include "gmock/gmock.h"
 #include <string>
-#if 0
+#if 01
 #include "MockDriver.cpp"
 
 class MockDriverTest : public ::testing::Test {
