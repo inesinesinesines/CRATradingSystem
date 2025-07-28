@@ -1,6 +1,6 @@
 #include "gmock/gmock.h"
+#include "autotradingsystem.cpp"
 #include <string>
-
 #include "MockDriver.cpp"
 
 TEST(MockDriverTest, LoginTest) {
