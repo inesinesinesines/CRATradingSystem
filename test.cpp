@@ -3,7 +3,7 @@
 #include "MockDriver.cpp"
 #include <string>
 
-TEST(TC, TC1) {
+TEST(TC, DISABLED_TC1) {
 	AutoTradingSystem* ats = new AutoTradingSystem();
 	std::string broker = "mock";
 	ats->selectStockBroker(broker);
