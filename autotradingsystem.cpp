@@ -26,7 +26,7 @@ public:
 		}
 		if (brocker_name == "nemo") {
 			brocker = std::make_unique<NemoAdapter>();
-			this->broker_name = "kiwer";
+			this->broker_name = "nemo";
 			return true;
 		}
 
