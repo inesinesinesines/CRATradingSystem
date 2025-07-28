@@ -26,8 +26,13 @@ public:
 		std::cout.rdbuf(oldCoutStreamBuf); //º¹¿ø
 	}
 
-	string GetConsolePrint() {
-		return oss.str();
+	string GetConsolePrintlower() {
+		string originalStr = oss.str();
+		string lowerStr;
+		for (char c : originalStr) {
+			lowerStr += static_cast<char>(tolower(c));
+		}
+		return lowerStr;
 	}
 
 	void SetBrokerAndLogin() {
@@ -54,7 +59,10 @@ TEST_P(AutoTradingSystemFixture, GetBroker) {
 
 TEST_P(AutoTradingSystemFixture, Login) {
 	SetBrokerAndLogin();
+
 	EXPECT_EQ(ID, ats.getLoginUserID());
+	string str = GetConsolePrintlower();
+	EXPECT_THAT(str.find("login"), Not(std::string::npos));
 }
 
 TEST_P(AutoTradingSystemFixture, LoginFailTest_NoBroker) {
@@ -66,6 +74,9 @@ TEST_P(AutoTradingSystemFixture, Buy) {
 	int currentStockCount = ats.getUserStockCount(STOCKCODE);
 	ats.buy(STOCKCODE, stockCount, stockPrice);
 	EXPECT_EQ(currentStockCount + stockCount, ats.getUserStockCount(STOCKCODE));
+
+	string str = GetConsolePrintlower();
+	EXPECT_THAT(str.find("buy"), Not(std::string::npos));
 }
 
 TEST_P(AutoTradingSystemFixture, BuyFailTest_NoLogin) {
@@ -90,6 +101,9 @@ TEST_P(AutoTradingSystemFixture, Sell) {
 	int prevUserStockCnt = ats.getUserStockCount(STOCKCODE);
 	ats.sell(STOCKCODE, stockCount, stockPrice);
 	EXPECT_THAT(ats.getUserStockCount(STOCKCODE), Le(prevUserStockCnt));
+
+	string str = GetConsolePrintlower();
+	EXPECT_THAT(str.find("sell"), Not(std::string::npos));
 }
 
 TEST_P(AutoTradingSystemFixture, SellFailTest_NoLogin) {
