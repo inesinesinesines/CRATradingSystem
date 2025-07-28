@@ -13,8 +13,8 @@ class MockDriver : public StockBrockerDriver {
     return true;
   }
 
-  void checkArgumentValidation(std::string str) {
-    if (str == "") {
+  void checkArgumentValidation(std::string argument) {
+    if (argument == "") {
       throw std::invalid_argument("Invalid Argument Exists");
     }
   }
