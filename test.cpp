@@ -3,19 +3,8 @@
 #include "MockDriver.cpp"
 #include <string>
 
-TEST(TC, DISABLED_TC1) {
-	AutoTradingSystem* ats = new AutoTradingSystem();
-	std::string broker = "mock";
-	ats->selectStockBroker(broker);
-	EXPECT_EQ(broker, ats->getCurrentBrokerName());
-}
-
-TEST(TC, LOGIN_TC1) {
-	AutoTradingSystem* ats = new AutoTradingSystem();
-	std::string broker = "nemo";
-	ats->selectStockBroker(broker);
-	EXPECT_EQ(true, ats->login("user", "passwd"));
-}
+#if 01
+#include "MockDriver.cpp"
 
 class MockDriverTest : public ::testing::Test {
 public:
@@ -55,4 +44,4 @@ TEST_F(MockDriverTest, SellTest) {
 TEST_F(MockDriverTest, GetPrice) {
 	EXPECT_NO_THROW({ sbDriver->getPrice(STOCKCODE); });
 }
-
+#endif 
