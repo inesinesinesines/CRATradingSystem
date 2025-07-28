@@ -12,9 +12,9 @@ TEST(TC, DISABLED_TC1) {
 
 TEST(TC, LOGIN_TC1) {
 	AutoTradingSystem* ats = new AutoTradingSystem();
-	std::string broker = "mock";
+	std::string broker = "nemo";
 	ats->selectStockBroker(broker);
-	EXPECT_EQ(false, ats->login("user","passwd"));
+	EXPECT_EQ(true, ats->login("user", "passwd"));
 }
 
 class MockDriverTest : public ::testing::Test {

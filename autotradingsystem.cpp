@@ -1,21 +1,40 @@
 #pragma once
-#include <string>
-#include <iostream>
-#include <memory>
-#include "Broker.h"
 
-class AutoTradingSystem : public StockBrockerDriver {
+#include "Broker.h"
+#include "MockDriver.cpp"
+#include "kiwer_adapter.cpp"
+#include "nemo_adapter.cpp"
+
+using std::string;
+
+class AutoTradingSystem : public StockBrockerDriver{
 public:
 
-    std::string broker_name;
-    std::unique_ptr<StockBrockerDriver> brocker;
-    void selectStockBroker(std::string blockername) {
+	std::unique_ptr<StockBrockerDriver> brocker;
+	string broker_name;
 
-        brocker = nullptr;
+	bool selectStockBroker(std::string brocker_name) {
+		if (brocker_name == "mock") {
+			brocker = std::make_unique<MockDriver>();
+			this->broker_name = "mock";
+			return true;
+		}
+		if (brocker_name == "kiwer") {
+			brocker = std::make_unique<KiwerAdapter>();
+			this->broker_name = "kiwer";
+			return true;
+		}
+		if (brocker_name == "nemo") {
+			brocker = std::make_unique<NemoAdapter>();
+			this->broker_name = "nemo";
+			return true;
+		}
+
+		return false;
     }
 
     std::string getCurrentBrokerName() {
-        return ""; // nullptr 대신 "" (std::string엔 nullptr 반환 금지)
+        return broker_name;
     }
 
     // StockBrockerDriver의 pure virtual 함수 반드시 모두 구현해야 함!

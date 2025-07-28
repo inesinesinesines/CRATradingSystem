@@ -1,3 +1,5 @@
+#pragma once
+
 #include "nemo_api.cpp"
 #include "Broker.h"
 #include <string>
@@ -5,6 +7,8 @@
 
 class NemoAdapter : public StockBrockerDriver {
 public:
+
+	NemoAdapter() = default;
 	NemoAdapter(NemoAPI* nemo) : api(nemo) {
 
 	}

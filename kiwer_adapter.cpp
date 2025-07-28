@@ -1,3 +1,4 @@
+#pragma once
 #include "kiwer_api.cpp"
 #include "Broker.h"
 #include <string>
@@ -5,6 +6,7 @@
 
 class KiwerAdapter : public StockBrockerDriver {
 public:
+	KiwerAdapter() = default;
 	KiwerAdapter(KiwerAPI* kiwer) : api(kiwer) {
 
 	}
