@@ -7,3 +7,9 @@ class MockDriver : public StockBrockerDriver {
 	MOCK_METHOD((bool), sell, (std::string, int, int), (override));
 	MOCK_METHOD((int), getPrice, (std::string), (override));
 };
+
+class Nemo : public StockBrockerDriver {
+};
+
+class Kiwer : public StockBrockerDriver {
+};
