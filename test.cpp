@@ -2,13 +2,13 @@
 #include <string>
 #if 01
 #include "MockDriver.cpp"
+#include <string>
 
 class MockDriverTest : public ::testing::Test {
 public:
 protected:
 	void SetUp() override {
 	}
-
 	StockBrockerDriver* sbDriver = new MockDriver();
 
 	const std::string ID = "USER";

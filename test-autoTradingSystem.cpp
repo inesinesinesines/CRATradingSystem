@@ -17,15 +17,14 @@ public:
 	void SetUp() override {
 		std::ostringstream oss;
 		oldCoutStreamBuf = std::cout.rdbuf();
-		std::cout.rdbuf(oss.rdbuf()); // »õ·Î¿î ¹öÆÛ·Î redirection
+		std::cout.rdbuf(oss.rdbuf()); // Â»ÃµÂ·ÃŽÂ¿Ã® Â¹Ã¶Ã†Ã›Â·ÃŽ redirection
 
 		BROKER = GetParam();
 	}
 
 	void TearDown() override{
-		std::cout.rdbuf(oldCoutStreamBuf); //º¹¿ø
+		std::cout.rdbuf(oldCoutStreamBuf); //ÂºÂ¹Â¿Ã¸
 	}
-
 	string GetConsolePrintlower() {
 		string originalStr = oss.str();
 		string lowerStr;
@@ -59,7 +58,7 @@ TEST_P(AutoTradingSystemFixture, GetBroker) {
 
 TEST_P(AutoTradingSystemFixture, Login) {
 	SetBrokerAndLogin();
-
+  
 	EXPECT_EQ(ID, ats.getLoginUserID());
 	string str = GetConsolePrintlower();
 	EXPECT_THAT(str.find("login"), Not(std::string::npos));
@@ -74,7 +73,6 @@ TEST_P(AutoTradingSystemFixture, Buy) {
 	int currentStockCount = ats.getUserStockCount(STOCKCODE);
 	ats.buy(STOCKCODE, stockCount, stockPrice);
 	EXPECT_EQ(currentStockCount + stockCount, ats.getUserStockCount(STOCKCODE));
-
 	string str = GetConsolePrintlower();
 	EXPECT_THAT(str.find("buy"), Not(std::string::npos));
 }
