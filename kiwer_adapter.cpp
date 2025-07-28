@@ -16,16 +16,18 @@ public:
 
 	bool buy(std::string code, int count, int price) override {
 		api->buy(code, count, price);
+		return true;
 	}
 
 	bool sell(std::string code, int count, int price) override {
 		api->sell(code, count, price);
+		return true;
 	}
 
 	int getPrice(std::string code) override {
-		api->currentPrice(code);
+		return api->currentPrice(code);
 	}
 
 private:
-	KiwerAPI* api;
+	KiwerAPI* api = nullptr;
 };

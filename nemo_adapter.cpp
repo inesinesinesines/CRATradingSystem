@@ -16,16 +16,18 @@ public:
 
 	bool buy(std::string code, int count, int price) override {
 		api->purchasingStock(code, price, count);
+		return true;
 	}
 
 	bool sell(std::string code, int count, int price) override {
 		api->sellingStock(code, price, count);
+		return true;
 	}
 
 	int getPrice(std::string code) override {
-		api->getMarketPrice(code, 1);
+		return api->getMarketPrice(code, 0);
 	}
 
 private:
-	NemoAPI* api;
+	NemoAPI* api = nullptr;
 };
