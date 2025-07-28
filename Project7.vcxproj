@@ -124,7 +124,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="autotradingsystem.cpp" />
-    <ClCompile Include="Broker.cpp" />
     <ClCompile Include="kiwer_adapter.cpp" />
     <ClCompile Include="kiwer_api.cpp" />
     <ClCompile Include="main.cpp" />
@@ -140,7 +139,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="autotradingsystem.h" />
     <ClInclude Include="Broker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
