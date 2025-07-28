@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-#include "Broker.h"
-=======
 #include "Brocker.h"
->>>>>>> ea288d175d600b8279afbada0089214db8730987
 #include "gmock/gmock.h"
 
 class MockDriver : public StockBrockerDriver {
