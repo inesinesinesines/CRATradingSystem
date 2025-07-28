@@ -10,6 +10,7 @@ public:
     std::string broker_name;
     std::unique_ptr<StockBrockerDriver> brocker;
     void selectStockBroker(std::string blockername) {
+
         brocker = nullptr;
     }
 
@@ -25,7 +26,7 @@ public:
         }
         return false;
     }
- 
+
     bool buy(std::string code, int price, int quantity) override {
         return true;
     }
@@ -35,6 +36,7 @@ public:
     int getPrice(std::string code) override {
         return 0;
     }
+
 private:
     bool isValidLoginParameter(std::string& id, std::string& passwd)
     {
