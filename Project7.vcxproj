@@ -142,7 +142,6 @@
   <ItemGroup>
     <ClInclude Include="autotradingsystem.h" />
     <ClInclude Include="Broker.h" />
-    <ClInclude Include="MockDriver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
