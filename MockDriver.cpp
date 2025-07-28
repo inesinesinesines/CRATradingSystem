@@ -60,4 +60,4 @@ class MockDriver : public StockBrockerDriver {
 
     return 1;
   };
-};
+
