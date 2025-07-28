@@ -125,12 +125,17 @@
   <ItemGroup>
     <ClCompile Include="autotradingsystem.cpp" />
     <ClCompile Include="Broker.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="kiwer_adapter.cpp" />
     <ClCompile Include="kiwer_api.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MockDriver.cpp" />
     <ClCompile Include="nemo_adapter.cpp" />
     <ClCompile Include="nemo_api.cpp" />
+=======
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MockDriver.cpp" />
+>>>>>>> ea288d175d600b8279afbada0089214db8730987
     <ClCompile Include="test.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> %(AdditionalOptions)</AdditionalOptions>
@@ -140,8 +145,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="autotradingsystem.h" />
     <ClInclude Include="Broker.h" />
+=======
+    <ClInclude Include="Brocker.h" />
+>>>>>>> ea288d175d600b8279afbada0089214db8730987
     <ClInclude Include="MockDriver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

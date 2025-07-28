@@ -1,6 +1,3 @@
-#ifndef MOCKDRIVER_H
-#define MOCKDRIVER_H
-
 #include <string>
 #include <iostream>
 #include <stdexcept>
@@ -23,5 +20,3 @@ public:
 
     int getPrice(std::string code) override;
 };
-
-#endif // MOCKDRIVER_H
