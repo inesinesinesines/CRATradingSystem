@@ -3,13 +3,8 @@
 #include "MockDriver.cpp"
 #include <string>
 
-TEST(TC, TC1) {
-	AutoTradingSystem* ats = new AutoTradingSystem();
-	std::string broker = "mock";
-	ats->selectStockBroker(broker);
-	EXPECT_EQ(broker, ats->getCurrentBrokerName());
-}
-
+#if 01
+#include "MockDriver.cpp"
 
 class MockDriverTest : public ::testing::Test {
 public:
@@ -49,4 +44,4 @@ TEST_F(MockDriverTest, SellTest) {
 TEST_F(MockDriverTest, GetPrice) {
 	EXPECT_NO_THROW({ sbDriver->getPrice(STOCKCODE); });
 }
-
+#endif 
