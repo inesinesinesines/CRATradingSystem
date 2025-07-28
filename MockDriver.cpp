@@ -1,63 +1,63 @@
-#include "Broker.cpp"
+#include "Brocker.h"
 #include "gmock/gmock.h"
 
 class MockDriver : public StockBrockerDriver {
- private:
-  bool isLogined = false;
-  bool isLoginState() {
-    if (!isLogined) {
-      std::cout << "Not Logined Yet\n";
-      return false;
+private:
+    bool isLogined = false;
+    bool isLoginState() {
+        if (!isLogined) {
+            std::cout << "Not Logined Yet\n";
+            return false;
+        }
+
+        return true;
     }
 
-    return true;
-  }
-
-  void checkArgumentValidation(std::string argument) {
-    if (argument == "") {
-      throw std::invalid_argument("Invalid Argument Exists");
-    }
-  }
-
- public:
-  bool login(std::string id, std::string password) override {
-    checkArgumentValidation(id);
-    checkArgumentValidation(password);
-
-    std::cout << "Login Success\n";
-    isLogined = true;
-    return true;
-  }
-
-  bool buy(std::string code, int count, int price) override {
-    checkArgumentValidation(code);
-
-    if (!isLoginState()) {
-      return false;
+    void checkArgumentValidation(std::string argument) {
+        if (argument == "") {
+            throw std::invalid_argument("Invalid Argument Exists");
+        }
     }
 
-    std::cout << "Buy Success\n";
-    return true;
-  }
+public:
+    bool login(std::string id, std::string password) override {
+        checkArgumentValidation(id);
+        checkArgumentValidation(password);
 
-  bool sell(std::string code, int count, int stockPrice) override {
-    checkArgumentValidation(code);
-
-    if (!isLoginState()) {
-      return false;
+        std::cout << "Login Success\n";
+        isLogined = true;
+        return true;
     }
 
-    std::cout << "Sell Success\n";
-    return true;
-  };
+    bool buy(std::string code, int count, int price) override {
+        checkArgumentValidation(code);
 
-  int getPrice(std::string code) override {
-    checkArgumentValidation(code);
+        if (!isLoginState()) {
+            return false;
+        }
 
-    if (!isLoginState()) {
-      return 0;
+        std::cout << "Buy Success\n";
+        return true;
     }
 
-    return 1;
-  };
+    bool sell(std::string code, int count, int stockPrice) override {
+        checkArgumentValidation(code);
 
+        if (!isLoginState()) {
+            return false;
+        }
+
+        std::cout << "Sell Success\n";
+        return true;
+    };
+
+    int getPrice(std::string code) override {
+        checkArgumentValidation(code);
+
+        if (!isLoginState()) {
+            return 0;
+        }
+
+        return 1;
+    };
+};

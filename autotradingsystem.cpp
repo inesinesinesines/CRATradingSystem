@@ -2,6 +2,9 @@
 #include "MockDriver.h"
 #include <string>
 #include <iostream>
+#include <memory> 
+
+
 using std::string;
 
 class AutoTradingSystem {
