@@ -29,8 +29,8 @@ class MockDriver : public StockBrockerDriver {
     return true;
   }
 
-  bool buy(std::string password, int count, int price) override {
-    checkArgumentValidation(password);
+  bool buy(std::string code, int count, int price) override {
+    checkArgumentValidation(code);
 
     if (!isLoginState()) {
       return false;
@@ -50,6 +50,7 @@ class MockDriver : public StockBrockerDriver {
     std::cout << "Sell Success\n";
     return true;
   };
+
   int getPrice(std::string code) override {
     checkArgumentValidation(code);
 
