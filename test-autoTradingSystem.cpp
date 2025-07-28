@@ -4,19 +4,19 @@
 using namespace std;
 using namespace testing;
 
-//class AutoTradingSystem {
-//public:
-//	bool selectBroker(string broker) { return true; }
-//	string getBrokerName() { return ""; };
-//	void login(std::string id, std::string password) {};
-//	string getLoginUserID() { return ""; };
-//	void buy(std::string stockCode, int count, int price) {};
-//	void sell(std::string stockCode, int count, int price) {};
-//	int getPrice(std::string stockCode) { return 100; };
-//	void buyNiceTiming(std::string stockCode, int cost) {};
-//	void sellNiceTiming(std::string stockCode, int stockAmount) {};
-//	int getUserStockCount(std::string stockCode) { return 0; /*user stock*/ };
-//};
+class AutoTradingSystem {
+public:
+	bool selectBroker(string broker) { return true; }
+	string getBrokerName() { return ""; };
+	void login(std::string id, std::string password) {};
+	string getLoginUserID() { return ""; };
+	void buy(std::string stockCode, int count, int price) {};
+	void sell(std::string stockCode, int count, int price) {};
+	int getPrice(std::string stockCode) { return 100; };
+	void buyNiceTiming(std::string stockCode, int cost) {};
+	void sellNiceTiming(std::string stockCode, int stockAmount) {};
+	int getUserStockCount(std::string stockCode) { return 0; /*user stock*/ };
+};
 
 class AutoTradingSystemFixture : public Test{
 public:
@@ -97,4 +97,38 @@ TEST_F(AutoTradingSystemFixture, GetPrice) {
 	ats.selectBroker(BROKER);
 	ats.login(ID, PASSWORD);
 	EXPECT_NO_THROW(ats.getPrice(STOCKCODE));
+}
+
+TEST_F(AutoTradingSystemFixture, buyNiceTiming) {
+	ats.selectBroker(BROKER);
+	ats.login(ID, PASSWORD);
+
+	int prevUserStockCnt = ats.getUserStockCount(STOCKCODE);
+	ats.buyNiceTiming(STOCKCODE, stockCount * stockPrice);
+	EXPECT_THAT(ats.getUserStockCount(STOCKCODE), Ge(prevUserStockCnt));
+}
+
+TEST_F(AutoTradingSystemFixture, buyNiceTiming_FailWith0Cost) {
+	ats.selectBroker(BROKER);
+	ats.login(ID, PASSWORD);
+
+	int prevUserStockCnt = ats.getUserStockCount(STOCKCODE);
+	EXPECT_THROW(ats.buyNiceTiming(STOCKCODE, 0), std::exception);
+}
+
+TEST_F(AutoTradingSystemFixture, sellNiceTiming) {
+	ats.selectBroker(BROKER);
+	ats.login(ID, PASSWORD);
+
+	int prevUserStockCnt = ats.getUserStockCount(STOCKCODE);
+	ats.sellNiceTiming(STOCKCODE, stockCount * stockPrice);
+	EXPECT_THAT(ats.getUserStockCount(STOCKCODE), Le(prevUserStockCnt));
+}
+
+TEST_F(AutoTradingSystemFixture, sellNiceTiming_FailWith0Cost) {
+	ats.selectBroker(BROKER);
+	ats.login(ID, PASSWORD);
+
+	int prevUserStockCnt = ats.getUserStockCount(STOCKCODE);
+	EXPECT_THROW(ats.sellNiceTiming(STOCKCODE, 0), std::exception);
 }

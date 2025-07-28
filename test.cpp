@@ -2,7 +2,7 @@
 #include "autotradingsystem.cpp"
 #include "MockDriver.cpp"
 #include <string>
-#if 01
+#if 0
 #include "MockDriver.cpp"
 
 class MockDriverTest : public ::testing::Test {
