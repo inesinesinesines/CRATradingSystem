@@ -4,19 +4,19 @@
 using namespace std;
 using namespace testing;
 
-class AutoTradingSystem {
-public:
-	bool selectBroker(string broker) { return true; }
-	string getBrokerName() { return ""; };
-	void login(std::string id, std::string password) {};
-	string getLoginUserID() { return ""; };
-	void buy(std::string stockCode, int count, int price) {};
-	void sell(std::string stockCode, int count, int price) {};
-	int getPrice(std::string stockCode) { return 100; };
-	void buyNiceTiming(std::string stockCode, int cost) {};
-	void sellNiceTiming(std::string stockCode, int stockAmount) {};
-	int getUserStockCount(std::string stockCode) { return 0; /*user stock*/ };
-};
+//class AutoTradingSystem {
+//public:
+//	bool selectBroker(string broker) { return true; }
+//	string getBrokerName() { return ""; };
+//	void login(std::string id, std::string password) {};
+//	string getLoginUserID() { return ""; };
+//	void buy(std::string stockCode, int count, int price) {};
+//	void sell(std::string stockCode, int count, int price) {};
+//	int getPrice(std::string stockCode) { return 100; };
+//	void buyNiceTiming(std::string stockCode, int cost) {};
+//	void sellNiceTiming(std::string stockCode, int stockAmount) {};
+//	int getUserStockCount(std::string stockCode) { return 0; /*user stock*/ };
+//};
 
 class AutoTradingSystemFixture : public Test{
 public:
@@ -96,5 +96,5 @@ TEST_F(AutoTradingSystemFixture, SellFailTest_StockPriceMinus) {
 TEST_F(AutoTradingSystemFixture, GetPrice) {
 	ats.selectBroker(BROKER);
 	ats.login(ID, PASSWORD);
-	ats.getPrice(STOCKCODE);
+	EXPECT_NO_THROW(ats.getPrice(STOCKCODE));
 }
