@@ -13,7 +13,7 @@ class MockDriver : public StockBrockerDriver {
     return true;
   }
 
-  void checkAssert(std::string str) {
+  void checkArgumentValidation(std::string str) {
     if (str == "") {
       throw std::invalid_argument("Invalid Argument Exists");
     }
@@ -21,8 +21,8 @@ class MockDriver : public StockBrockerDriver {
 
  public:
   bool login(std::string id, std::string password) override {
-    checkAssert(id);
-    checkAssert(password);
+    checkArgumentValidation(id);
+    checkArgumentValidation(password);
 
     std::cout << "Login Success\n";
     isLogined = true;
@@ -30,7 +30,7 @@ class MockDriver : public StockBrockerDriver {
   }
 
   bool buy(std::string password, int count, int price) override {
-    checkAssert(password);
+    checkArgumentValidation(password);
 
     if (!isLoginState()) {
       return false;
@@ -41,7 +41,7 @@ class MockDriver : public StockBrockerDriver {
   }
 
   bool sell(std::string code, int count, int stockPrice) override {
-    checkAssert(code);
+    checkArgumentValidation(code);
 
     if (!isLoginState()) {
       return false;
@@ -51,7 +51,7 @@ class MockDriver : public StockBrockerDriver {
     return true;
   };
   int getPrice(std::string code) override {
-    checkAssert(code);
+    checkArgumentValidation(code);
 
     if (!isLoginState()) {
       return 0;
