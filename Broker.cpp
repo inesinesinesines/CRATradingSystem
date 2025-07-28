@@ -1,6 +1,6 @@
 #include <string>
 
-class Broker {
+class StockBrockerDriver {
 public:
 	virtual bool login(std::string id, std::string passwd) = 0;
 	virtual bool buy(std::string code, int price, int quantity) = 0;

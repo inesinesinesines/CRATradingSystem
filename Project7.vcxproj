@@ -126,6 +126,7 @@
     <ClCompile Include="autotradingsystem.cpp" />
     <ClCompile Include="Broker.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MockDriver.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
